@@ -2,8 +2,10 @@
 build/
 build_debug/
 misc/file2c/file2cpp
+cmake-build-debug/
 
 # Editor and OS things
+.idea/
 imgui.ini
 .DS_Store
 .vscode

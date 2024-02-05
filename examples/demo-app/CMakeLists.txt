@@ -67,20 +67,14 @@ else()
 endif()
 
 # Add polyscope
-add_subdirectory(../../ "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}")
 
 # Create an executable
 add_executable(
         polyscopedemo
         demo_app.cpp
-        simple_dot_mesh_parser.cpp
-        surface_mesh_io.cpp
-        )
+)
 
-target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../../deps/args")
-target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../../deps/json/include")
 target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../../deps/happly")
-target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../../deps/stb")
-target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(polyscopedemo PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}" ${Stb_INCLUDE_DIR})
 
-target_link_libraries(polyscopedemo polyscope stb)
+target_link_libraries(polyscopedemo PUBLIC polyscope igl::igl_core geometry-central)

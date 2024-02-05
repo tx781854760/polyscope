@@ -1,6 +1,6 @@
 // Copyright 2017-2023, Nicholas Sharp and the Polyscope contributors. https://polyscope.run
 
-#include "backends/imgui_impl_opengl3.h"
+#include "imgui_impl_opengl3.h"
 #include "polyscope/render/engine.h"
 
 #ifdef POLYSCOPE_BACKEND_OPENGL3_GLFW_ENABLED
@@ -2308,9 +2308,9 @@ bool GLEngine::windowRequestsClose() {
 void GLEngine::pollEvents() { glfwPollEvents(); }
 
 bool GLEngine::isKeyPressed(char c) {
-  if (c >= '0' && c <= '9') return ImGui::IsKeyPressed(GLFW_KEY_0 + (c - '0'));
-  if (c >= 'a' && c <= 'z') return ImGui::IsKeyPressed(GLFW_KEY_A + (c - 'a'));
-  if (c >= 'A' && c <= 'Z') return ImGui::IsKeyPressed(GLFW_KEY_A + (c - 'A'));
+  if (c >= '0' && c <= '9') return ImGui::IsKeyPressed(static_cast<ImGuiKey>(GLFW_KEY_0 + (c - '0')));
+  if (c >= 'a' && c <= 'z') return ImGui::IsKeyPressed(static_cast<ImGuiKey>(GLFW_KEY_A + (c - 'a')));
+  if (c >= 'A' && c <= 'Z') return ImGui::IsKeyPressed(static_cast<ImGuiKey>(GLFW_KEY_A + (c - 'A')));
   exception("keyPressed only supports 0-9, a-z, A-Z");
   return false;
 }

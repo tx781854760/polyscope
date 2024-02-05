@@ -67,7 +67,7 @@ void buildErrorUI(std::string message, bool fatal) {
     }
 
     // Make a button
-    if (ImGui::Button("My bad.", ImVec2(buttonWidth, 0)) || ImGui::IsKeyPressed((int)' ')) {
+    if (ImGui::Button("My bad.", ImVec2(buttonWidth, 0)) || ImGui::IsKeyPressed(static_cast<ImGuiKey>(' '))) {
       popContext();
       ImGui::CloseCurrentPopup();
     }
@@ -179,7 +179,7 @@ void buildWarningUI(std::string warningBaseString, std::string warningDetailStri
     }
 
     // Make a button
-    if (ImGui::Button("This is fine.", ImVec2(buttonWidth, 0)) || ImGui::IsKeyPressed((int)' ')) {
+    if (ImGui::Button("This is fine.", ImVec2(buttonWidth, 0)) || ImGui::IsKeyPressed(static_cast<ImGuiKey>(' '))) {
       ImGui::CloseCurrentPopup();
       popContext();
     }

@@ -5,8 +5,14 @@
 #include <cmath>
 
 // Added by nsharp: use glm instead of internal vector class
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#define GLM_ENABLE_EXPERIMENTAL
+#endif
 #include <glm/glm.hpp>
 #include <glm/gtx/norm.hpp>
+#ifdef GLM_ENABLE_EXPERIMENTAL
+#undef GLM_ENABLE_EXPERIMENTAL
+#endif
 
 namespace MC
 {

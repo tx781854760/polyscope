@@ -16,10 +16,10 @@
 
 #include "stb_image.h"
 
-#include "json/json.hpp"
+#include "nlohmann/json.hpp"
 using json = nlohmann::json;
 
-#include "backends/imgui_impl_opengl3.h"
+#include "imgui_impl_opengl3.h"
 
 namespace polyscope {
 
@@ -611,7 +611,7 @@ void buildPolyscopeGui() {
   render::engine->buildEngineGui();
 
   // Render options tree
-  ImGui::SetNextTreeNodeOpen(false, ImGuiCond_FirstUseEver);
+  ImGui::SetNextItemOpen(false, ImGuiCond_FirstUseEver);
   if (ImGui::TreeNode("Render")) {
 
     // fps
@@ -632,7 +632,7 @@ void buildPolyscopeGui() {
     ImGui::TreePop();
   }
 
-  ImGui::SetNextTreeNodeOpen(false, ImGuiCond_FirstUseEver);
+  ImGui::SetNextItemOpen(false, ImGuiCond_FirstUseEver);
   if (ImGui::TreeNode("Debug")) {
 
     if (ImGui::Button("Force refresh")) {
@@ -693,7 +693,7 @@ void buildStructureGui() {
                                     // identically-named labels
 
     // Build the structure's UI
-    ImGui::SetNextTreeNodeOpen(structureMap.size() > 0, ImGuiCond_FirstUseEver);
+    ImGui::SetNextItemOpen(structureMap.size() > 0, ImGuiCond_FirstUseEver);
     if (ImGui::CollapsingHeader((catName + " (" + std::to_string(structureMap.size()) + ")").c_str())) {
       // Draw shared GUI elements for all instances of the structure
       if (structureMap.size() > 0) {
@@ -702,7 +702,7 @@ void buildStructureGui() {
 
       int32_t skipCount = 0;
       for (auto& x : structureMap) {
-        ImGui::SetNextTreeNodeOpen(structureMap.size() <= 8,
+        ImGui::SetNextItemOpen(structureMap.size() <= 8,
                                    ImGuiCond_FirstUseEver); // closed by default if more than 8
 
         if (structuresToSkip.find(x.second.get()) != structuresToSkip.end()) {

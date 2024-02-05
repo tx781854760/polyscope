@@ -41,11 +41,6 @@ if("${POLYSCOPE_BACKEND_OPENGL3_GLFW}")
     ${INCLUDE_ROOT}render/opengl/shaders/common.h
   )
 
-  list(APPEND BACKEND_INCLUDE_DIRS
-    ${CMAKE_CURRENT_SOURCE_DIR}/../deps/glad/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/../deps/glfw/include
-  )
-
   # Link settings
   list(APPEND BACKEND_LIBS
     glfw ${GLFW_LIBRARIES}
@@ -68,7 +63,7 @@ if("${POLYSCOPE_BACKEND_OPENGL3_GLFW}")
   else()
       # On Windows/Linux, use the glad openGL loader
 
-      list(APPEND BACKEND_LIBS glad)
+      list(APPEND BACKEND_LIBS glad::glad)
   endif()
       
   add_definitions(-DPOLYSCOPE_BACKEND_OPENGL3_GLFW_ENABLED)  
@@ -316,7 +311,7 @@ SET(HEADERS
 )
 
 # Create a single library for the project
-add_library(polyscope ${SRCS} ${BACKEND_SRCS} ${HEADERS} ${BACKEND_HEADERS})
+add_library(polyscope STATIC ${SRCS} ${BACKEND_SRCS} ${HEADERS} ${BACKEND_HEADERS})
 
 # Mark the library target and its headers as installable
 install(TARGETS polyscope)
@@ -330,15 +325,11 @@ add_definitions(-DNOMINMAX)
 
 # Include settings
 target_include_directories(polyscope PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include")
-target_include_directories(polyscope PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../deps/glm")
-#target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/args") # not used, polyscope generates no apps directly
 target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/happly")
 target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/MarchingCubeCpp")
-target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/json/include")
-target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/stb")
 target_include_directories(polyscope PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/../deps/MarchingCubeCpp/include")
-target_include_directories(polyscope PRIVATE "${BACKEND_INCLUDE_DIRS}")
+target_include_directories(polyscope PRIVATE ${Stb_INCLUDE_DIR})
         
 # Link settings
-target_link_libraries(polyscope PUBLIC imgui)
-target_link_libraries(polyscope PRIVATE "${BACKEND_LIBS}" stb)
+target_link_libraries(polyscope PUBLIC imgui::imgui nlohmann_json::nlohmann_json glm::glm glad::glad)
+target_link_libraries(polyscope PRIVATE "${BACKEND_LIBS}" )

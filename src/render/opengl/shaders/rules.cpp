@@ -13,7 +13,7 @@ const ShaderReplacementRule GLSL_VERSION(
     /* rule name */ "GLSL_VERSION",
     /* replacement sources */
     {
-        {"GLSL_VERSION", "#version 330 core"}, 
+        {"GLSL_VERSION", "#version 330 core"},
     }
 );
 

@@ -4,8 +4,14 @@
 
 #include "polyscope/polyscope.h"
 
+#ifndef GLM_ENABLE_EXPERIMENTAL
+#define GLM_ENABLE_EXPERIMENTAL
+#endif
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
+#ifdef GLM_ENABLE_EXPERIMENTAL
+#undef GLM_ENABLE_EXPERIMENTAL
+#endif
 
 #include <cmath>
 
